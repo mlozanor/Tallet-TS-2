@@ -32,14 +32,36 @@ table.appendChild(thead);
 const tbody = table.createTBody();
 series.forEach(serie => {
     const row = tbody.insertRow();
-    row.innerHTML = `<td>${serie.id}</td><td>${serie.name}</td><td>${serie.channel}</td><td>${serie.seasons}</td>`;
+    row.innerHTML += `<td>${serie.id}</td><td>${serie.name}</td><td>${serie.channel}</td><td>${serie.seasons}</td>`;
+    row.addEventListener('click', () => {
+        showDetails(serie);
+    });
 });
-table.appendChild(tbody);
 // Pie de tabla con el promedio de temporadas
+table.appendChild(tbody);
 const tfoot = table.createTFoot();
 const footerRow = tfoot.insertRow();
 const averageSeasons = series.reduce((acc, curr) => acc + curr.seasons, 0) / series.length;
 footerRow.innerHTML = `<th colspan="3">Promedio de temporadas</th><td>${averageSeasons.toFixed(2)}</td>`;
 table.appendChild(tfoot);
+// Mostrar los detalles de la serie en un card
+function showDetails(serie) {
+    const cardContainer = document.getElementById('card-container');
+    if (!cardContainer)
+        return;
+    cardContainer.innerHTML = '';
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.innerHTML = `
+    <img src="${serie.imageUrl}" class="card-img-top" alt="${serie.name}">
+    <div class="card-body">
+      <h5 class="card-title">${serie.name}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">${serie.channel}</h6>
+      <p class="card-text">${serie.description}</p>
+      <a href="${serie.url}" target="_blank" class="card-link">Ver en ${serie.channel}</a>
+    </div>
+  `;
+    cardContainer.appendChild(card);
+}
 // Añadir la tabla al documento HTML
 document.body.appendChild(table);

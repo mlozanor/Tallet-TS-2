@@ -33,4 +33,29 @@ body {
     background-color: #95bbde;
   }
 
+  .card {
+    display: inline-block;
+    vertical-align: right;
+    margin-left: 30px;
+    padding: 10px;
+    width: 400px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .card h2 {
+    margin-top: 0;
+  }
+  
+  .card p {
+    line-height: 1.5;
+  }
+
   
